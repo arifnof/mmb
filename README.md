@@ -1,15 +1,15 @@
 # mmb
 MMB
 - sql menggunakan MySQL
-  > restore sql ke DB
+  > 1. restore sql ke DB
 - backend menggunakan ExpressJS
-  > sesuaikan koneksi DB pada file "./config/database.js"
-  > di terminal, masuk ke folder mmb_backend
-  > jangan lupa "npm install" untuk mendapatkan library yang dibutuhkan
-  > jalankan dengan command "npm run dev"
+  > 1. sesuaikan koneksi DB pada file "./config/database.js"
+  > 2. di terminal, masuk ke folder mmb_backend
+  > 3. jangan lupa "npm install" untuk mendapatkan library yang dibutuhkan
+  > 4. jalankan dengan command "npm run dev"
 - contoh html, css, js
-  > buka file index.html dengan web browser (Chrome)
+  > 1. buka file index.html dengan web browser (Chrome)
 - frontend menggunakan ReactJS
-  > di terminal, masuk ke folder mmb_frontend
-  > jangan lupa "npm install" untuk mendapatkan library yang dibutuhkan
-  > jalankan dengan command "npm start"
+  > 1. di terminal, masuk ke folder mmb_frontend
+  > 2. jangan lupa "npm install" untuk mendapatkan library yang dibutuhkan
+  > 3. jalankan dengan command "npm start"
