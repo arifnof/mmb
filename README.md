@@ -1,5 +1,7 @@
 # mmb
+
 MMB
+
 - sql menggunakan MySQL
   > 1. restore sql ke DB
 - backend menggunakan ExpressJS
@@ -13,3 +15,5 @@ MMB
   > 1. di terminal, masuk ke folder mmb_frontend
   > 2. jangan lupa "npm install" untuk mendapatkan library yang dibutuhkan
   > 3. jalankan dengan command "npm start"
+
+have fun!!!
