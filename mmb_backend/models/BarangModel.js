@@ -3,7 +3,17 @@ const db = require('../config/database')
 async function ambilSemua() {
   const conn = await db.getConnection()
   try {
-    const [rows, fields] = await conn.execute('SELECT * FROM Barang')
+    const [rows, fields] = await conn.execute(
+      `SELECT 
+        b.id, 
+        b.nama, 
+        b.satuan, 
+        b.harga, 
+        b.supplier_id, 
+        s.nama as supplier_nama
+      FROM Barang b 
+      left join Supplier s on b.supplier_id = s.id`
+    )
     return rows
   } finally {
     conn.release()

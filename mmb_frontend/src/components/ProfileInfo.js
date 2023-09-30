@@ -1,15 +1,18 @@
-import foto_pp from '../assets/img/Untitled.png'
+import foto_pp from "../assets/img/Untitled.png"
 
 function ProfileInfo(props) {
   return (
-    <div class="image-text">
-      <span class="image">
-        <img src={foto_pp} alt="" />
+    <div className="image-text">
+      <span className="image">
+        <img
+          src={foto_pp}
+          alt=""
+        />
       </span>
 
-      <div class="text logo-text">
-        <span class="name"> {props.nama} </span>
-        <span class="profession"> {props.role} </span>
+      <div className="text logo-text">
+        <span className="name"> {props.nama} </span>
+        <span className="profession"> {props.role} </span>
       </div>
     </div>
   )

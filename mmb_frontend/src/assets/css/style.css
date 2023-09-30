@@ -2,12 +2,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 :root {
   /* ===== Colors ===== */
-  --body-color: #e4e9f7;
+  --page-color: #e4e9f7;
   --sidebar-color: #fff;
   --primary-color: #dc143c;
   --primary-color-light: #f6f5ff;
@@ -23,7 +23,7 @@
 
 body {
   min-height: 100vh;
-  background-color: var(--body-color);
+  background-color: var(--page-color);
   transition: var(--tran-05);
 }
 
@@ -32,8 +32,8 @@ body {
   color: #fff;
 }
 
-body.dark {
-  --body-color: #18191a;
+.page .dark {
+  --page-color: #18191a;
   --sidebar-color: #242526;
   --primary-color: #3a3b3c;
   --primary-color-light: #3a3b3c;
@@ -152,7 +152,7 @@ header .image-text .profession {
   transition: var(--tran-05);
 }
 
-body.dark .sidebar header .toggle {
+.page .dark .sidebar header .toggle {
   color: var(--text-color);
 }
 
@@ -201,9 +201,9 @@ body.dark .sidebar header .toggle {
   background-color: var(--primary-color);
   color: var(--sidebar-color);
 }
-body.dark .sidebar li.active a,
-body.dark .sidebar li.active a .icon,
-body.dark .sidebar li.active a .text {
+.page .dark .sidebar li.active a,
+.page .dark .sidebar li.active a .icon,
+.page .dark .sidebar li.active a .text {
   color: var(--text-color);
 }
 
@@ -214,8 +214,8 @@ body.dark .sidebar li.active a .text {
 .sidebar li a:hover .text {
   color: var(--sidebar-color);
 }
-body.dark .sidebar li a:hover .icon,
-body.dark .sidebar li a:hover .text {
+.page .dark .sidebar li a:hover .icon,
+.page .dark .sidebar li a:hover .text {
   color: var(--text-color);
 }
 
@@ -247,10 +247,10 @@ body.dark .sidebar li a:hover .text {
 .mode .sun-moon i.sun {
   opacity: 0;
 }
-body.dark .mode .sun-moon i.sun {
+.page .dark .mode .sun-moon i.sun {
   opacity: 1;
 }
-body.dark .mode .sun-moon i.moon {
+.page .dark .mode .sun-moon i.moon {
   opacity: 0;
 }
 
@@ -275,7 +275,7 @@ body.dark .mode .sun-moon i.moon {
 }
 
 .switch::before {
-  content: '';
+  content: "";
   position: absolute;
   height: 15px;
   width: 15px;
@@ -287,7 +287,7 @@ body.dark .mode .sun-moon i.moon {
   transition: var(--tran-04);
 }
 
-body.dark .switch::before {
+.page .dark .switch::before {
   left: 20px;
 }
 
@@ -298,7 +298,7 @@ body.dark .switch::before {
   left: 250px;
   height: 100vh;
   width: calc(100% - 250px);
-  background-color: var(--body-color);
+  background-color: var(--page-color);
   transition: var(--tran-05);
 }
 .home .title {
@@ -318,6 +318,6 @@ body.dark .switch::before {
   height: 100vh;
   width: calc(100% - 78px);
 }
-body.dark .home .title {
+.page .dark .home .title {
   color: var(--text-color);
 }
