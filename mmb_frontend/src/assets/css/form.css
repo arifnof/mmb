@@ -121,8 +121,6 @@ button:active:disabled {
 }
 
 .button-small {
-  border: 1px solid #4f005f;
-  background: #4f005f;
   padding: 0.25rem 0.5rem;
   font-size: 0.5rem;
 }
