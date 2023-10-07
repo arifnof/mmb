@@ -1,7 +1,13 @@
 const express = require("express")
+
+const cors = require("cors")
+
 const app = express()
 const port = 5005
 const apiRoutes = require("./routes/api")
+
+// enable cors
+app.use(cors())
 
 // Parse JSON request body
 app.use(express.json())

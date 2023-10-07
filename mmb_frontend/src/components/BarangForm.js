@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 const defaultData = {
   id: "",
@@ -16,12 +16,27 @@ const BarangForm = (props) => {
     setDataBarang({ ...dataBarang, [name]: value })
   }
 
+  useEffect(() => {
+    if (props.modeUbah === false) {
+      setDataBarang(defaultData)
+    } else if (props.modeUbah === true) {
+      setDataBarang(props.dataBarang)
+    }
+  }, [props.modeUbah, props.dataBarang])
+
   //   console.log(dataBarang)
 
   const btnSimpanHandler = (event) => {
     event.preventDefault()
     // simpan ke database
-    console.log(dataBarang)
+
+    // lepas ID
+    const { id, ...dataSiapDisimpan } = dataBarang
+
+    // kirim ke parent untuk di simpan ke DB
+    props.onSimpanClick(dataSiapDisimpan)
+
+    console.log(dataSiapDisimpan)
     // reset form
     setDataBarang(defaultData)
   }
@@ -31,6 +46,12 @@ const BarangForm = (props) => {
     // reset form
     setDataBarang(defaultData)
     props.onCancelClick() // untuk meng-close modal
+  }
+
+  const btnSimpanPerubahanHandler = (event) => {
+    event.preventDefault()
+    const { id, ...dataSiapDisimpan } = dataBarang
+    props.onSimpanPerubahanClick(id, dataSiapDisimpan) //
   }
 
   return (
@@ -85,12 +106,22 @@ const BarangForm = (props) => {
           >
             Cancel
           </button>
-          <button
-            className="button"
-            onClick={btnSimpanHandler}
-          >
-            Simpan
-          </button>
+          {!props.modeUbah && (
+            <button
+              className="button"
+              onClick={btnSimpanHandler}
+            >
+              Simpan Tambah Baru
+            </button>
+          )}
+          {props.modeUbah && (
+            <button
+              className="button"
+              onClick={btnSimpanPerubahanHandler}
+            >
+              Simpan Perubahan
+            </button>
+          )}
         </div>
       </form>
     </>

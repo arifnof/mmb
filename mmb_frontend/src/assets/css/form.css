@@ -38,6 +38,15 @@
   color: #111;
 }
 
+.invalid {
+  border: 1px solid #b40e0e !important;
+  background-color: #fddddd !important;
+}
+
+.error-text {
+  color: #b40e0e !important;
+}
+
 @media (min-width: 768px) {
   .control {
     align-items: center;
@@ -109,6 +118,23 @@ button:active:disabled {
   border-color: #ccc;
   color: #666666;
   cursor: not-allowed;
+}
+
+.button-small {
+  border: 1px solid #4f005f;
+  background: #4f005f;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.5rem;
+}
+
+.button-small.button-delete {
+  border: 1px solid #c90000;
+  background: #c90000;
+}
+
+.button-small.button-delete:hover {
+  border: 1px solid #ff49494d;
+  background: #ff49494d;
 }
 
 .actions {

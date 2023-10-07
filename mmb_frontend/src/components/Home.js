@@ -1,5 +1,6 @@
 import Barang from "./Barang"
 import Counter from "./Counter"
+import Pegawai from "./Pegawai"
 
 const Home = () => {
   return (
@@ -9,6 +10,8 @@ const Home = () => {
       <div className="content">
         {/* <Counter /> */}
         <Barang namaData="Daftar Barang" />
+        <br />
+        <Pegawai />
       </div>
     </section>
   )
