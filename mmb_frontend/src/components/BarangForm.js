@@ -18,9 +18,9 @@ const BarangForm = (props) => {
 
   useEffect(() => {
     if (props.modeUbah === false) {
-      setDataBarang(defaultData)
+      setDataBarang(defaultData) // menampilkan form kosong
     } else if (props.modeUbah === true) {
-      setDataBarang(props.dataBarang)
+      setDataBarang(props.dataBarang) // menampilkan form sesuai data barang yg mau di edit
     }
   }, [props.modeUbah, props.dataBarang])
 
