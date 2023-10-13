@@ -125,12 +125,22 @@ button:active:disabled {
   font-size: 0.5rem;
 }
 
-.button-small.button-delete {
+.button-delete {
   border: 1px solid #c90000;
   background: #c90000;
 }
 
-.button-small.button-delete:hover {
+.dark .button-delete {
+  border: 1px solid #400000;
+  background: #400000;
+}
+
+.button-delete:hover {
+  border: 1px solid #c45050;
+  background: #c45050;
+}
+
+.dark .button-delete:hover {
   border: 1px solid #ff49494d;
   background: #ff49494d;
 }

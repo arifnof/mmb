@@ -1,5 +1,5 @@
 import Barang from "./Barang"
-import Counter from "./Counter"
+// import Counter from "./Counter"
 import Pegawai from "./Pegawai"
 
 const Home = () => {

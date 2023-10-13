@@ -18,11 +18,12 @@ DROP TABLE IF EXISTS "Barang";
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE "Barang" (
-  "id" int(11) DEFAULT NULL,
+  "id" int(11) NOT NULL,
   "nama" varchar(100) DEFAULT NULL,
   "satuan" varchar(10) DEFAULT NULL,
   "harga" int(11) DEFAULT NULL,
-  "supplier_id" int(11) DEFAULT NULL
+  "supplier_id" int(11) DEFAULT NULL,
+  PRIMARY KEY ("id")
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -32,7 +33,7 @@ CREATE TABLE "Barang" (
 
 LOCK TABLES "Barang" WRITE;
 /*!40000 ALTER TABLE "Barang" DISABLE KEYS */;
-INSERT INTO "Barang" VALUES (1,'Jeruk','KG',20000,1),(2,'Semangka','KG',10000,1),(3,'Susu UHT 500ml','Pcs',6000,2),(4,'Air Mineral 600ml','Botol',40000,2),(5,'Telur Omega','KG',30000,3);
+INSERT INTO "Barang" VALUES (1000,'Kentang Impor','kg',22000,3),(1001,'baru','pcs',500,NULL),(1002,'Wortel','kg',15000,NULL),(1003,'Wortel Impor','kg',18000,NULL),(1004,'Kentang','kg',20000,3),(1005,'Telur Biasa','kg',25000,3),(1006,'Telur Omega','kg',30000,3),(1007,'Air Mineral 600ml','botol',40000,2),(1008,'Susu UHT 500ml','pcs',6000,2),(1009,'Semangka','kg',10000,1),(1010,'Jeruk','kg',20000,1);
 /*!40000 ALTER TABLE "Barang" ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -68,7 +69,7 @@ CREATE TABLE "Log_Pegawai" (
 
 LOCK TABLES "Log_Pegawai" WRITE;
 /*!40000 ALTER TABLE "Log_Pegawai" DISABLE KEYS */;
-INSERT INTO "Log_Pegawai" VALUES (1,202120005,'Levering Janet','2001-09-02','P','Jakarta',4901798,202120005,'Levering Janet','2001-09-02','P','Jakarta',5901798,'2023-09-02 07:39:31'),(2,202200010,'Ahmad','2003-09-02','L','Jakarta',4901798,202200010,'Ahmad','2003-09-02','L','Bandung',5401798,'2023-09-02 15:06:27'),(3,202020011,'AA BB','2005-08-09','L','Jakarta',4901798,202020011,'CC DD','1995-08-09','L','Bogor',4901798,'2023-09-09 00:14:11'),(4,202200099,'John Doe','1999-09-09','L','Bandung',5401798,202200099,'John Doe 2','2001-09-09','L','Bandung',5401798,'2023-09-09 13:57:24');
+INSERT INTO "Log_Pegawai" VALUES (1,202120005,'Levering Janet','2001-09-02','P','Jakarta',4901798,202120005,'Levering Janet','2001-09-02','P','Jakarta',5901798,'2023-09-02 07:39:31'),(2,202200010,'Ahmad','2003-09-02','L','Jakarta',4901798,202200010,'Ahmad','2003-09-02','L','Bandung',5401798,'2023-09-02 15:06:27'),(3,202020011,'AA BB','2005-08-09','L','Jakarta',4901798,202020011,'CC DD','1995-08-09','L','Bogor',4901798,'2023-09-09 00:14:11'),(4,202200099,'John Doe','1999-09-09','L','Bandung',5401798,202200099,'John Doe 2','2001-09-09','L','Bandung',5401798,'2023-09-09 13:57:24'),(5,20230916,'John September','2000-03-05','L','Surabaya',4500000,20230916,'John September','2000-03-05','L','Malang',4500000,'2023-09-16 12:03:47'),(6,20230916,'John September','2000-03-05','L','Malang',4500000,20230916,'John September','2000-03-05','L','Malang',5500000,'2023-09-16 12:04:22'),(7,19950202,'John Doe','1995-02-02','L','Semarang',3500000,199520002,'John Doe','1995-02-02','L','Semarang',3500000,'2023-10-08 06:04:45');
 /*!40000 ALTER TABLE "Log_Pegawai" ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,6 +102,7 @@ CREATE TABLE "Log_Pelanggan" (
 
 LOCK TABLES "Log_Pelanggan" WRITE;
 /*!40000 ALTER TABLE "Log_Pelanggan" DISABLE KEYS */;
+INSERT INTO "Log_Pelanggan" VALUES (1,2,'Ana Trujillo ','Depok','08121231231','anat999@gmail.com','Ana Trujillo ','Depok','08121231231','anat999@gmail.com','2023-09-23 08:52:41'),(2,2,'Ana Trujillo ','Depok','08121231231','anat999@gmail.com','Ana Trujillo ','Depok','08121231231','anat999@gmail.com','2023-09-23 08:54:48');
 /*!40000 ALTER TABLE "Log_Pelanggan" ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,7 +135,7 @@ CREATE TABLE "Log_Supplier" (
 
 LOCK TABLES "Log_Supplier" WRITE;
 /*!40000 ALTER TABLE "Log_Supplier" DISABLE KEYS */;
-INSERT INTO "Log_Supplier" VALUES (1,3,'Waskarya','Tira','Bekasi','021867123','Waskarya','Tira2','Bekasi','021867123','2023-09-07 20:49:08');
+INSERT INTO "Log_Supplier" VALUES (1,3,'Waskarya','Tira','Bekasi','021867123','Waskarya','Tira2','Bekasi','021867123','2023-09-07 20:49:08'),(2,4,'Megantara 3','Putra 3','Bogor 3','0251345323','Megantara 4','Putra 4','Bogor 4','0251345324','2023-09-23 08:59:45');
 /*!40000 ALTER TABLE "Log_Supplier" ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,7 +163,7 @@ CREATE TABLE "Pegawai" (
 
 LOCK TABLES "Pegawai" WRITE;
 /*!40000 ALTER TABLE "Pegawai" DISABLE KEYS */;
-INSERT INTO "Pegawai" VALUES (202020001,'Arif Syah','1995-02-05','L','Jakarta',4901798),(202020002,'Nofyan Syah','2004-10-05','L','Depok',4694493),(202020003,'Davolio Nancy','2005-10-06','P','Jakarta',4901798),(202020004,'Fuller Andew','2004-05-05','L','Jakarta',4901798),(202120005,'Levering Janet','2001-09-02','P','Jakarta',5901798),(202120006,'Suyama Michael','2002-02-05','L','Bogor',4639429),(202120007,'Dodsworth Anne','2005-02-06','P','Bogor',4639429),(202120008,'Andy Michael','2001-02-20','L','Bandung',3492465),(202120009,'King Robert','1990-02-05','L','Bandung',3492465),(202200010,'Ahmad','2003-09-02','L','Bandung',5401798),(202200099,'John Doe 2','2001-09-09','L','Bandung',5401798);
+INSERT INTO "Pegawai" VALUES (199520002,'John Doe','1995-02-02','L','Semarang',3500000),(202020001,'Arif Syah','1995-02-05','L','Jakarta',4901798),(202020002,'Nofyan Syah','2004-10-05','L','Depok',4694493),(202020003,'Davolio Nancy','2005-10-06','P','Jakarta',4901798),(202020004,'Fuller Andew','2004-05-05','L','Jakarta',4901798),(202120005,'Levering Janet','2001-09-02','P','Jakarta',5901798),(202120006,'Suyama Michael','2002-02-05','L','Bogor',4639429),(202120007,'Dodsworth Anne','2005-02-06','P','Bogor',4639429),(202120008,'Andy Michael','2001-02-20','L','Bandung',3492465),(202120009,'King Robert','1990-02-05','L','Bandung',3492465),(202200010,'Ahmad','2003-09-02','L','Bandung',5401798);
 /*!40000 ALTER TABLE "Pegawai" ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -199,11 +201,12 @@ DROP TABLE IF EXISTS "Pelanggan";
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE "Pelanggan" (
-  "id" int(11) DEFAULT NULL,
+  "id" int(11) NOT NULL,
   "nama" varchar(100) DEFAULT NULL,
   "alamat" varchar(200) DEFAULT NULL,
   "no_hp" varchar(20) DEFAULT NULL,
-  "email" varchar(100) DEFAULT NULL
+  "email" varchar(100) DEFAULT NULL,
+  PRIMARY KEY ("id")
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -213,7 +216,7 @@ CREATE TABLE "Pelanggan" (
 
 LOCK TABLES "Pelanggan" WRITE;
 /*!40000 ALTER TABLE "Pelanggan" DISABLE KEYS */;
-INSERT INTO "Pelanggan" VALUES (1,'Alfreds Futterkiste ','Jakarta','0813348523','alfredsf987@gmail.com'),(2,'Ana Trujillo ','Depok','08121231231','anat999@gmail.com'),(3,'Antonio Moreno ','Jakarta','08151231238','antoniom876@gmail.com'),(4,'Arnof','Bogor','0819324234','arnof@gmail.com');
+INSERT INTO "Pelanggan" VALUES (1,'Alfreds Futterkiste ','Jakarta','0813348523','alfredsf987@gmail.com'),(2,'Ana Trujillo ','Depok','08121231231','anat999@gmail.com'),(3,'Antonio Moreno ','Jakarta','08151231238','antoniom876@gmail.com'),(4,'Arnof','Bogor','0819324234','arnof@gmail.com'),(6,'Ade Trujillo ','Depok','08121231234','ade999@gmail.com');
 /*!40000 ALTER TABLE "Pelanggan" ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -251,10 +254,11 @@ DROP TABLE IF EXISTS "Pesanan";
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE "Pesanan" (
-  "id" int(11) DEFAULT NULL,
+  "id" int(11) NOT NULL,
   "pelanggan_id" varchar(100) DEFAULT NULL,
   "pegawai_nrp" varchar(100) DEFAULT NULL,
   "tanggal" date DEFAULT NULL,
+  PRIMARY KEY ("id"),
   KEY "Pesanan_pelanggan_id_IDX" ("pelanggan_id"),
   KEY "Pesanan_pegawai_nrp_IDX" ("pegawai_nrp")
 );
@@ -266,7 +270,7 @@ CREATE TABLE "Pesanan" (
 
 LOCK TABLES "Pesanan" WRITE;
 /*!40000 ALTER TABLE "Pesanan" DISABLE KEYS */;
-INSERT INTO "Pesanan" VALUES (201,'1','202020002','2023-08-01'),(202,'2','202020001','2023-08-01'),(203,'1','202020001','2023-08-10'),(203,'3','202020001','2023-08-10'),(204,'4','202020001','2023-08-10');
+INSERT INTO "Pesanan" VALUES (201,'1','202020002','2023-08-01'),(202,'2','202020001','2023-08-01'),(203,'1','202020001','2023-08-10'),(204,'4','202020001','2023-08-10'),(205,'3','202020001','2023-08-10');
 /*!40000 ALTER TABLE "Pesanan" ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -278,10 +282,11 @@ DROP TABLE IF EXISTS "PesananDetail";
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE "PesananDetail" (
-  "id" int(11) DEFAULT NULL,
+  "id" int(11) NOT NULL,
   "pesanan_id" int(11) DEFAULT NULL,
   "barang_id" int(11) DEFAULT NULL,
-  "kuantiti" int(11) DEFAULT NULL
+  "kuantiti" int(11) DEFAULT NULL,
+  PRIMARY KEY ("id")
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -303,11 +308,12 @@ DROP TABLE IF EXISTS "Supplier";
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE "Supplier" (
-  "id" int(11) DEFAULT NULL,
+  "id" int(11) NOT NULL,
   "nama" varchar(100) DEFAULT NULL,
   "kontak_nama" varchar(100) DEFAULT NULL,
   "kota" varchar(100) DEFAULT NULL,
-  "telp_no" varchar(20) DEFAULT NULL
+  "telp_no" varchar(20) DEFAULT NULL,
+  PRIMARY KEY ("id")
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -441,4 +447,4 @@ DELIMITER ;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-13 15:22:02
+-- Dump completed on 2023-10-08  7:31:11

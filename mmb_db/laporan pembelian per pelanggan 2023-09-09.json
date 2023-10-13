@@ -1,0 +1,23 @@
+{
+"\nselect p.id, p.nama, SUM(pd.kuantiti * b.harga) as total_pembelian \nfrom Pelanggan p\nleft join Pesanan p2 on p.id = p2.pelanggan_id \nleft join PesananDetail pd on p2.id = pd.pesanan_id \nleft join Barang b on pd.barang_id = b.id \ngroup by p.id, p.nama\n": [
+	{
+		"id" : 1,
+		"nama" : "Alfreds Futterkiste ",
+		"total_pembelian" : 398000
+	},
+	{
+		"id" : 2,
+		"nama" : "Ana Trujillo ",
+		"total_pembelian" : 10000
+	},
+	{
+		"id" : 3,
+		"nama" : "Antonio Moreno ",
+		"total_pembelian" : 312000
+	},
+	{
+		"id" : 4,
+		"nama" : "Arnof",
+		"total_pembelian" : null
+	}
+]}

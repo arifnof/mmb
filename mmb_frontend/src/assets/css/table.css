@@ -7,7 +7,7 @@
 }
 
 .dark .custom-table {
-  background: linear-gradient(45deg, #8c8c8c, #545454);
+  background: linear-gradient(45deg, #383838, #171717);
   color: var(--text-color);
 }
 

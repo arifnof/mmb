@@ -54,9 +54,13 @@ const BarangForm = (props) => {
     props.onSimpanPerubahanClick(id, dataSiapDisimpan) //
   }
 
+  const title = props.modeUbah
+    ? "Formulir Ubah Data Barang"
+    : "Formulir Tambah Data Barang"
+
   return (
     <>
-      <h3>Formulir Tambah Data Barang</h3>
+      <h3>{title}</h3>
       <form className="form-control">
         <div className="control">
           <label>ID Barang</label>

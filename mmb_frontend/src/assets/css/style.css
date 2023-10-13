@@ -300,6 +300,7 @@ header .image-text .profession {
   width: calc(100% - 250px);
   background-color: var(--page-color);
   transition: var(--tran-05);
+  overflow-y: scroll;
 }
 .home .title {
   font-size: 30px;

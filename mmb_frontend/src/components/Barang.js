@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 import "../assets/css/table.css"
 import BarangForm from "./BarangForm"
+import HapusForm from "./HapusForm"
 import Modal from "./Modal"
 
 const Barang = (props) => {
   const [data, setData] = useState([])
 
   const [showBarangForm, setShowBarangForm] = useState(false)
+  const [showBarangHapus, setShowBarangHapus] = useState(false)
   const [modeUbah, setModeUbah] = useState(false)
   const [dataBarang, setDataBarang] = useState(null)
 
@@ -62,7 +64,7 @@ const Barang = (props) => {
     axios
       .get(`http://localhost:5005/api/barang/${idBarang}`)
       .then((response) => {
-        console.log(response.data.data[0])
+        // console.log(response.data.data[0])
         setDataBarang(response.data.data[0])
         // tampilkan form barang, dengan data tersebut
         setShowBarangForm(true)
@@ -70,8 +72,24 @@ const Barang = (props) => {
       })
   }
 
-  const btnHapusBarangHandler = (idBarang) => {
-    console.log(idBarang)
+  const btnHapusBarangHandler = (idBarang, namaBarang) => {
+    // console.log(idBarang, namaBarang)
+    setDataBarang({ id: idBarang, nama: namaBarang })
+    setShowBarangHapus(true)
+  }
+
+  const btnCancelHapusHandler = () => {
+    setDataBarang(null)
+    setShowBarangHapus(false)
+  }
+
+  const btnHapusHandler = () => {
+    axios
+      .delete(`http://localhost:5005/api/barang/${dataBarang.id}`)
+      .then((response) => {
+        btnCancelHapusHandler()
+        getSemuaBarang()
+      })
   }
 
   return (
@@ -84,6 +102,16 @@ const Barang = (props) => {
             modeUbah={modeUbah}
             dataBarang={dataBarang}
             onSimpanPerubahanClick={simpanBarangUbah}
+          />
+        </Modal>
+      )}
+      {showBarangHapus && (
+        <Modal onBackdropClick={btnCancelHapusHandler}>
+          <HapusForm
+            title={`Hapus Barang "${dataBarang.nama}" ?`}
+            message=""
+            onDelete={btnHapusHandler}
+            onCancel={btnCancelHapusHandler}
           />
         </Modal>
       )}
@@ -121,7 +149,7 @@ const Barang = (props) => {
                   <button
                     className="button button-small button-delete"
                     onClick={() => {
-                      btnHapusBarangHandler(item.id)
+                      btnHapusBarangHandler(item.id, item.nama)
                     }}
                   >
                     <i className="bx bx-message-square-x"></i> Hapus

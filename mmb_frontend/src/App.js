@@ -36,6 +36,7 @@ function App() {
           onToggleSidebar={toggleSidebarHandler}
           onSearchBoxClick={searchBoxClickHandler}
           sidebarClass={sidebarClass}
+          darkMode={darkMode}
         />
         <Home />
       </div>

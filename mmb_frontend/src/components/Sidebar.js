@@ -34,7 +34,9 @@ const Sidebar = (props) => {
               <i className="bx bx-moon icon moon"></i>
               <i className="bx bx-sun icon sun"></i>
             </div>
-            <span className="mode-text text">Dark mode</span>
+            <span className="mode-text text">
+              {props.darkMode ? "Light" : "Dark"} mode
+            </span>
 
             <div className="toggle-switch">
               <span
