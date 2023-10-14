@@ -19,7 +19,10 @@ const Sidebar = (props) => {
       </header>
 
       <div className="menu-bar">
-        <Menu onSearchBoxClick={props.onSearchBoxClick} />
+        <Menu
+          onSearchBoxClick={props.onSearchBoxClick}
+          selectedMenu={props.selectedMenu}
+        />
 
         <div className="bottom-content">
           <li className="">

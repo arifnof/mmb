@@ -6,37 +6,31 @@ const Menu = (props) => {
       id: "dashboard",
       text: "Dashboard",
       classIcon: "bx bx-home-alt",
-      isActive: false,
     },
     {
       id: "barang",
       text: "List Barang",
       classIcon: "bx bx-cube-alt",
-      isActive: true,
     },
     {
       id: "pegawai",
       text: "List Pegawai",
       classIcon: "bx bxs-user-badge",
-      isActive: false,
     },
     {
       id: "customer",
       text: "List Customers",
       classIcon: "bx bxs-user-detail",
-      isActive: false,
     },
     {
       id: "supplier",
       text: "List Suppliers",
       classIcon: "bx bxs-factory",
-      isActive: false,
     },
     {
       id: "laporan_penjualan",
       text: "Laporan Penjualan",
       classIcon: "bx bx-file",
-      isActive: false,
     },
   ]
 
@@ -59,6 +53,7 @@ const Menu = (props) => {
             <MenuItem
               key={item.id}
               {...item}
+              isActive={props.selectedMenu === item.id}
             />
           )
         })}

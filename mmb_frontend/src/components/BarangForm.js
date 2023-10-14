@@ -10,11 +10,43 @@ const defaultData = {
 const BarangForm = (props) => {
   const [dataBarang, setDataBarang] = useState(defaultData)
 
+  const [namaIsValid, setNamaIsValid] = useState(false)
+  const [namaMessage, setNamaMessage] = useState("")
+
+  const [hargaIsValid, setHargaIsValid] = useState(false)
+  const [hargaMessage, setHargaMessage] = useState("")
+
   const inputChangedHandler = (event) => {
     const name = event.target.name
     const value = event.target.value
     setDataBarang({ ...dataBarang, [name]: value })
   }
+
+  useEffect(() => {
+    if (dataBarang.nama === "" || dataBarang.nama.length < 3) {
+      setNamaIsValid(false)
+      setNamaMessage("Nama Barang harus diisi, minimal 3 karakter")
+    } else {
+      setNamaIsValid(true)
+      setNamaMessage("")
+    }
+
+    // console.log(dataBarang.harga)
+    if (dataBarang.harga === "") {
+      setHargaIsValid(false)
+      setHargaMessage("Harga harus diisi")
+    } else {
+      if (isNaN(dataBarang.harga)) {
+        // jika dataBarang.harga bukan angka, maka hargaIsValid = false
+        setHargaIsValid(false)
+        setHargaMessage("Harga harus berupa Angka")
+      } else {
+        // jika dataBarang.harga angka, maka hargaIsValid = true
+        setHargaIsValid(true)
+        setHargaMessage("")
+      }
+    }
+  }, [dataBarang])
 
   useEffect(() => {
     if (props.modeUbah === false) {
@@ -30,15 +62,17 @@ const BarangForm = (props) => {
     event.preventDefault()
     // simpan ke database
 
-    // lepas ID
-    const { id, ...dataSiapDisimpan } = dataBarang
+    if (hargaIsValid && namaIsValid) {
+      // lepas ID
+      const { id, ...dataSiapDisimpan } = dataBarang
 
-    // kirim ke parent untuk di simpan ke DB
-    props.onSimpanClick(dataSiapDisimpan)
+      // kirim ke parent untuk di simpan ke DB
+      props.onSimpanClick(dataSiapDisimpan)
 
-    console.log(dataSiapDisimpan)
-    // reset form
-    setDataBarang(defaultData)
+      console.log(dataSiapDisimpan)
+      // reset form
+      setDataBarang(defaultData)
+    }
   }
 
   const btnCancelHandler = (event) => {
@@ -50,8 +84,11 @@ const BarangForm = (props) => {
 
   const btnSimpanPerubahanHandler = (event) => {
     event.preventDefault()
-    const { id, ...dataSiapDisimpan } = dataBarang
-    props.onSimpanPerubahanClick(id, dataSiapDisimpan) //
+
+    if (hargaIsValid && namaIsValid) {
+      const { id, ...dataSiapDisimpan } = dataBarang
+      props.onSimpanPerubahanClick(id, dataSiapDisimpan) //
+    }
   }
 
   const title = props.modeUbah
@@ -82,6 +119,7 @@ const BarangForm = (props) => {
             onChange={inputChangedHandler}
           />
         </div>
+        {!namaIsValid && <p className="error-text">{namaMessage}</p>}
         <div className="control">
           <label>Satuan</label>
           <select
@@ -103,6 +141,7 @@ const BarangForm = (props) => {
             onChange={inputChangedHandler}
           />
         </div>
+        {!hargaIsValid && <p className="error-text">{hargaMessage}</p>}
         <div className="actions">
           <button
             className="button-secondary"

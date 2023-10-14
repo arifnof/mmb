@@ -1,46 +1,43 @@
-import React, { useState } from "react"
-import "./assets/css/style.css"
-import "./assets/css/table.css"
-import "./assets/css/form.css"
-import "./assets/css/modal.css"
-
-import Sidebar from "./components/Sidebar"
-import Home from "./components/Home"
+import React from "react"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import Page from "./components/Page"
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false) // boolean : true / false
-  const [sidebarClose, setSidebarClose] = useState(false)
-
-  const classDiv = darkMode === true ? "dark" : ""
-  const sidebarClass = sidebarClose === true ? "close" : ""
-
-  const switchDarkModeHandler = () => {
-    const modeBaru = darkMode === true ? false : true
-    setDarkMode(modeBaru)
-  }
-
-  const toggleSidebarHandler = () => {
-    const modeBaru = sidebarClose === true ? false : true
-    setSidebarClose(modeBaru)
-  }
-
-  const searchBoxClickHandler = () => {
-    setSidebarClose(false)
-  }
-
   return (
-    <div className="page">
-      <div className={classDiv}>
-        <Sidebar
-          onSwitchDarkMode={switchDarkModeHandler}
-          onToggleSidebar={toggleSidebarHandler}
-          onSearchBoxClick={searchBoxClickHandler}
-          sidebarClass={sidebarClass}
-          darkMode={darkMode}
-        />
-        <Home />
-      </div>
-    </div>
+    <>
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={<Page selectedMenu="" />}
+          ></Route>
+          <Route
+            path="/dashboard"
+            element={<Page selectedMenu="dashboard" />}
+          ></Route>
+          <Route
+            path="/barang"
+            element={<Page selectedMenu="barang" />}
+          ></Route>
+          <Route
+            path="/pegawai"
+            element={<Page selectedMenu="pegawai" />}
+          ></Route>
+          <Route
+            path="/customer"
+            element={<Page selectedMenu="customer" />}
+          ></Route>
+          <Route
+            path="/supplier"
+            element={<Page selectedMenu="supplier" />}
+          ></Route>
+          <Route
+            path="/laporan_penjualan"
+            element={<Page selectedMenu="laporan_penjualan" />}
+          ></Route>
+        </Routes>
+      </Router>
+    </>
   )
 }
 

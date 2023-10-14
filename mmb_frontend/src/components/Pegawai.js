@@ -8,10 +8,23 @@ const Pegawai = () => {
 
   const [showPegawaiForm, setShowPegawaiForm] = useState(false)
 
+  const [errorStatus, setErrorStatus] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
+
   const getSemuaPegawai = () => {
-    axios.get("http://localhost:5005/api/pegawai/").then((response) => {
-      setData(response.data.data)
-    })
+    axios
+      .get("http://localhost:5005/api/pegawai/")
+      .then((response) => {
+        setData(response.data.data)
+      })
+      .catch((error) => {
+        setErrorStatus(true)
+        setErrorMessage(
+          "Error saat mengambil data dari Backend : " +
+            error.response.data.message
+        )
+        // console.log(error.response.data.message)
+      })
   }
 
   useEffect(() => {
@@ -52,6 +65,11 @@ const Pegawai = () => {
           </tr>
         </thead>
         <tbody>
+          {errorStatus && (
+            <tr>
+              <td colSpan={6}>{errorMessage}</td>
+            </tr>
+          )}
           {data.map((item) => {
             return (
               <tr key={item.nrp}>

@@ -2,16 +2,22 @@ import Barang from "./Barang"
 // import Counter from "./Counter"
 import Pegawai from "./Pegawai"
 
-const Home = () => {
+const Home = (props) => {
+  let content = <></>
+
+  if (props.content === "barang") {
+    content = <Barang namaData="Daftar Barang" />
+  } else if (props.content === "pegawai") {
+    content = <Pegawai />
+  }
+
   return (
     <section className="home">
       <div className="title">Judul Halaman</div>
 
       <div className="content">
         {/* <Counter /> */}
-        <Barang namaData="Daftar Barang" />
-        <br />
-        <Pegawai />
+        {content}
       </div>
     </section>
   )

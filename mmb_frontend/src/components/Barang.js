@@ -13,11 +13,25 @@ const Barang = (props) => {
   const [modeUbah, setModeUbah] = useState(false)
   const [dataBarang, setDataBarang] = useState(null)
 
+  const [errorStatus, setErrorStatus] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
+
   const getSemuaBarang = () => {
-    axios.get("http://localhost:5005/api/barang").then((response) => {
-      // set state berdasarkan data azios
-      setData(response.data.data)
-    })
+    axios
+      .get("http://localhost:5005/api/barang")
+      .then((response) => {
+        // set state berdasarkan data axios
+        const body = response.data
+        setData(body.data)
+      })
+      .catch((error) => {
+        setErrorStatus(true)
+        setErrorMessage(
+          "Error saat mengambil data dari Backend : " +
+            error.response.data.message
+        )
+        // console.log(error.response.data.message)
+      })
   }
 
   const simpanBarangBaru = (dataBaru) => {
@@ -31,19 +45,25 @@ const Barang = (props) => {
         // refresh table barang
         getSemuaBarang()
       })
+      .catch((error) => {
+        console.log(error.response.data)
+      })
   }
 
   const simpanBarangUbah = (idBarang, dataUbah) => {
     // simpan ke DB untuk PUT
-    axios
-      .put(`http://localhost:5005/api/barang/${idBarang}`, dataUbah)
-      .then((response) => {
-        console.log(response.data)
-        // close modal
-        setShowBarangForm(false)
-        // refresh table barang
-        getSemuaBarang()
-      })
+    // const url = 'http://localhost:5005/api/barang/' + idBarang
+    const url = `http://localhost:5005/api/barang/${idBarang}`
+    axios.put(url, dataUbah).then((response) => {
+      console.log(response.data)
+
+      // showNotif(response.data.message)
+
+      // close modal
+      setShowBarangForm(false)
+      // refresh table barang
+      getSemuaBarang()
+    })
   }
 
   useEffect(() => {
@@ -83,9 +103,9 @@ const Barang = (props) => {
     setShowBarangHapus(false)
   }
 
-  const btnHapusHandler = () => {
+  const btnHapusHandler = (idBarang) => {
     axios
-      .delete(`http://localhost:5005/api/barang/${dataBarang.id}`)
+      .delete(`http://localhost:5005/api/barang/${idBarang}`)
       .then((response) => {
         btnCancelHapusHandler()
         getSemuaBarang()
@@ -110,7 +130,9 @@ const Barang = (props) => {
           <HapusForm
             title={`Hapus Barang "${dataBarang.nama}" ?`}
             message=""
-            onDelete={btnHapusHandler}
+            onDelete={() => {
+              btnHapusHandler(dataBarang.id)
+            }}
             onCancel={btnCancelHapusHandler}
           />
         </Modal>
@@ -134,6 +156,11 @@ const Barang = (props) => {
           </tr>
         </thead>
         <tbody>
+          {errorStatus && (
+            <tr>
+              <td colSpan={6}>{errorMessage}</td>
+            </tr>
+          )}
           {data.map((item, index) => {
             return (
               <tr key={item.id}>
