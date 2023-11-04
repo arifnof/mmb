@@ -1,21 +1,28 @@
-import { useEffect, useState } from "react"
-import Modal from "./Modal"
-import PegawaiForm from "./PegawaiForm"
+import React, { useEffect, useState } from "react"
 import axios from "axios"
+import "../assets/css/table.css"
+import PegawaiForm from "./PegawaiForm"
+import HapusForm from "./HapusForm"
+import Modal from "./Modal"
 
-const Pegawai = () => {
+const Pegawai = (props) => {
   const [data, setData] = useState([])
 
   const [showPegawaiForm, setShowPegawaiForm] = useState(false)
+  const [showPegawaiHapus, setShowPegawaiHapus] = useState(false)
+  const [modeUbah, setModeUbah] = useState(false)
+  const [dataPegawai, setDataPegawai] = useState(null)
 
   const [errorStatus, setErrorStatus] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
 
   const getSemuaPegawai = () => {
     axios
-      .get("http://localhost:5005/api/pegawai/")
+      .get(process.env.REACT_APP_BE_URL + "/api/pegawai")
       .then((response) => {
-        setData(response.data.data)
+        // set state berdasarkan data axios
+        const body = response.data
+        setData(body.data)
       })
       .catch((error) => {
         setErrorStatus(true)
@@ -27,35 +34,120 @@ const Pegawai = () => {
       })
   }
 
+  const simpanPegawaiBaru = (dataBaru) => {
+    // simpan ke DB
+    axios
+      .post(process.env.REACT_APP_BE_URL + "/api/pegawai", dataBaru)
+      .then((response) => {
+        console.log(response.data)
+        // close modal
+        setShowPegawaiForm(false)
+        // refresh table pegawai
+        getSemuaPegawai()
+      })
+      .catch((error) => {
+        console.log(error.response.data)
+      })
+  }
+
+  const simpanPegawaiUbah = (nrp, dataUbah) => {
+    // simpan ke DB untuk PUT
+    // const url = 'http://localhost:5005/api/pegawai/' + nrp
+    const url = process.env.REACT_APP_BE_URL + `/api/pegawai/${nrp}`
+    axios.put(url, dataUbah).then((response) => {
+      console.log(response.data)
+
+      // showNotif(response.data.message)
+
+      // close modal
+      setShowPegawaiForm(false)
+      // refresh table pegawai
+      getSemuaPegawai()
+    })
+  }
+
   useEffect(() => {
     getSemuaPegawai()
   }, [])
 
-  const showPegawaiFormHandler = () => {
-    setShowPegawaiForm(true)
+  const closeModalPegawaiHandler = () => {
+    setShowPegawaiForm(false) // tidak tampil
   }
 
-  const closePegawaiFormHandler = () => {
-    setShowPegawaiForm(false)
+  const showModalPegawaiHandler = () => {
+    setShowPegawaiForm(true) // tampil
+    setModeUbah(false) // mode tambah pegawai
+  }
+
+  const btnUbahPegawaiHandler = (nrp) => {
+    // ambil data sesuai ID pegawai
+    axios
+      .get(process.env.REACT_APP_BE_URL + `/api/pegawai/${nrp}`)
+      .then((response) => {
+        // console.log(response.data.data[0])
+        setDataPegawai(response.data.data[0])
+        // tampilkan form pegawai, dengan data tersebut
+        setShowPegawaiForm(true)
+        setModeUbah(true) // mode edit pegawai
+      })
+  }
+
+  const btnHapusPegawaiHandler = (nrp, namaPegawai) => {
+    // console.log(nrp, namaPegawai)
+    setDataPegawai({ id: nrp, nama: namaPegawai })
+    setShowPegawaiHapus(true)
+  }
+
+  const btnCancelHapusHandler = () => {
+    setDataPegawai(null)
+    setShowPegawaiHapus(false)
+  }
+
+  const btnHapusHandler = (nrp) => {
+    axios
+      .delete(process.env.REACT_APP_BE_URL + `/api/pegawai/${nrp}`)
+      .then((response) => {
+        btnCancelHapusHandler()
+        getSemuaPegawai()
+      })
   }
 
   return (
     <>
       {showPegawaiForm && (
-        <Modal onBackdropClick={closePegawaiFormHandler}>
-          <PegawaiForm onCancelClick={closePegawaiFormHandler} />
+        <Modal onBackdropClick={closeModalPegawaiHandler}>
+          <PegawaiForm
+            onCancelClick={closeModalPegawaiHandler}
+            onSimpanClick={simpanPegawaiBaru}
+            modeUbah={modeUbah}
+            dataPegawai={dataPegawai}
+            onSimpanPerubahanClick={simpanPegawaiUbah}
+          />
+        </Modal>
+      )}
+      {showPegawaiHapus && (
+        <Modal onBackdropClick={btnCancelHapusHandler}>
+          <HapusForm
+            title={`Hapus Pegawai "${dataPegawai.nama}" ?`}
+            message=""
+            onDelete={() => {
+              btnHapusHandler(dataPegawai.nrp)
+            }}
+            onCancel={btnCancelHapusHandler}
+          />
         </Modal>
       )}
       <button
         className="button"
-        onClick={showPegawaiFormHandler}
+        onClick={showModalPegawaiHandler}
       >
         + Tambah Pegawai
       </button>
-      <h3>Daftar Pegawai</h3>
+      <h3>{props.namaData}</h3>
       <table className="custom-table">
         <thead>
           <tr>
+            <th>Actions</th>
             <th>NRP</th>
             <th>Nama</th>
             <th>Tgl Lahir</th>
@@ -70,15 +162,39 @@ const Pegawai = () => {
               <td colSpan={6}>{errorMessage}</td>
             </tr>
           )}
-          {data.map((item) => {
+          {data.map((item, index) => {
             return (
               <tr key={item.nrp}>
+                <td className="text-center">
+                  <button
+                    className="button button-small"
+                    onClick={() => {
+                      btnUbahPegawaiHandler(item.nrp)
+                    }}
+                  >
+                    <i className="bx bx-edit-alt"></i> Ubah
+                  </button>
+                  <button
+                    className="button button-small button-delete"
+                    onClick={() => {
+                      btnHapusPegawaiHandler(item.nrp, item.nama)
+                    }}
+                  >
+                    <i className="bx bx-message-square-x"></i> Hapus
+                  </button>
+                </td>
                 <td>{item.nrp}</td>
                 <td>{item.nama}</td>
-                <td>{item.tanggal_lahir}</td>
-                <td>{item.jenis_kelamin}</td>
+                <td>
+                  {new Date(item.tanggal_lahir).toLocaleDateString("ID", {
+                    dateStyle: "medium",
+                  })}
+                </td>
+                <td className="text-center">
+                  {item.jenis_kelamin === "L" ? "Laki-laki" : "Perempuan"}
+                </td>
                 <td>{item.tempat_tinggal}</td>
-                <td>{item.gaji}</td>
+                <td className="rupiah">{item.gaji.toLocaleString("ID")}</td>
               </tr>
             )
           })}

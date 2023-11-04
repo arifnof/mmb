@@ -18,7 +18,7 @@ const Barang = (props) => {
 
   const getSemuaBarang = () => {
     axios
-      .get("http://localhost:5005/api/barang")
+      .get(process.env.REACT_APP_BE_URL + "/api/barang")
       .then((response) => {
         // set state berdasarkan data axios
         const body = response.data
@@ -37,7 +37,7 @@ const Barang = (props) => {
   const simpanBarangBaru = (dataBaru) => {
     // simpan ke DB
     axios
-      .post("http://localhost:5005/api/barang", dataBaru)
+      .post(process.env.REACT_APP_BE_URL + "/api/barang", dataBaru)
       .then((response) => {
         console.log(response.data)
         // close modal
@@ -53,7 +53,7 @@ const Barang = (props) => {
   const simpanBarangUbah = (idBarang, dataUbah) => {
     // simpan ke DB untuk PUT
     // const url = 'http://localhost:5005/api/barang/' + idBarang
-    const url = `http://localhost:5005/api/barang/${idBarang}`
+    const url = process.env.REACT_APP_BE_URL + `/api/barang/${idBarang}`
     axios.put(url, dataUbah).then((response) => {
       console.log(response.data)
 
@@ -82,7 +82,7 @@ const Barang = (props) => {
   const btnUbahBarangHandler = (idBarang) => {
     // ambil data sesuai ID barang
     axios
-      .get(`http://localhost:5005/api/barang/${idBarang}`)
+      .get(process.env.REACT_APP_BE_URL + `/api/barang/${idBarang}`)
       .then((response) => {
         // console.log(response.data.data[0])
         setDataBarang(response.data.data[0])
@@ -105,7 +105,7 @@ const Barang = (props) => {
 
   const btnHapusHandler = (idBarang) => {
     axios
-      .delete(`http://localhost:5005/api/barang/${idBarang}`)
+      .delete(process.env.REACT_APP_BE_URL + `/api/barang/${idBarang}`)
       .then((response) => {
         btnCancelHapusHandler()
         getSemuaBarang()
@@ -164,7 +164,7 @@ const Barang = (props) => {
           {data.map((item, index) => {
             return (
               <tr key={item.id}>
-                <td>
+                <td className="text-center">
                   <button
                     className="button button-small"
                     onClick={() => {
@@ -184,8 +184,8 @@ const Barang = (props) => {
                 </td>
                 <td>{index + 1}</td>
                 <td>{item.nama}</td>
-                <td>{item.satuan}</td>
-                <td>{item.harga}</td>
+                <td className="text-center">{item.satuan}</td>
+                <td className="rupiah">{item.harga.toLocaleString("ID")}</td>
                 <td>{item.supplier_nama}</td>
               </tr>
             )
