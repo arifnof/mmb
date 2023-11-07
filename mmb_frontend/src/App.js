@@ -40,6 +40,14 @@ function App() {
             path="/laporan_penjualan"
             element={<Page selectedMenu="laporan_penjualan" />}
           ></Route>
+          <Route
+            path="/error_boundary"
+            element={<Page selectedMenu="error_boundary" />}
+          ></Route>
+          <Route
+            path="*"
+            element={<Page selectedMenu="not_found" />}
+          ></Route>
         </Routes>
       </Router>
     </>

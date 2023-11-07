@@ -28,9 +28,9 @@ const Barang = (props) => {
         setErrorStatus(true)
         setErrorMessage(
           "Error saat mengambil data dari Backend : " +
-            error.response.data.message
+            error
         )
-        // console.log(error.response.data.message)
+        console.log(error)
       })
   }
 
@@ -46,7 +46,7 @@ const Barang = (props) => {
         getSemuaBarang()
       })
       .catch((error) => {
-        console.log(error.response.data)
+        console.log(error)
       })
   }
 
@@ -55,15 +55,18 @@ const Barang = (props) => {
     // const url = 'http://localhost:5005/api/barang/' + idBarang
     const url = process.env.REACT_APP_BE_URL + `/api/barang/${idBarang}`
     axios.put(url, dataUbah).then((response) => {
-      console.log(response.data)
+        console.log(response.data)
 
-      // showNotif(response.data.message)
+        // showNotif(response.data.message)
 
-      // close modal
-      setShowBarangForm(false)
-      // refresh table barang
-      getSemuaBarang()
-    })
+        // close modal
+        setShowBarangForm(false)
+        // refresh table barang
+        getSemuaBarang()
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   useEffect(() => {
@@ -90,6 +93,9 @@ const Barang = (props) => {
         setShowBarangForm(true)
         setModeUbah(true) // mode edit barang
       })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   const btnHapusBarangHandler = (idBarang, namaBarang) => {
@@ -109,6 +115,9 @@ const Barang = (props) => {
       .then((response) => {
         btnCancelHapusHandler()
         getSemuaBarang()
+      })
+      .catch((error) => {
+        console.log(error)
       })
   }
 
@@ -147,11 +156,11 @@ const Barang = (props) => {
       <table className="custom-table">
         <thead>
           <tr>
-            <th>Actions</th>
-            <th>No</th>
+            <th style={{width: '15%'}}>Actions</th>
+            <th style={{width: '5%'}}>No</th>
             <th>Nama Barang</th>
-            <th>Satuan</th>
-            <th>Harga</th>
+            <th style={{width: '5%'}}>Satuan</th>
+            <th style={{width: '15%'}}>Harga</th>
             <th>Supplier</th>
           </tr>
         </thead>

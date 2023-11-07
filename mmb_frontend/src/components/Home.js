@@ -1,4 +1,6 @@
 import Barang from "./Barang"
+import ErrorBoundary from "./ErrorBoundary"
+import MyComponentWithError from "./MyComponentWithError"
 // import Counter from "./Counter"
 import Pegawai from "./Pegawai"
 
@@ -21,6 +23,14 @@ const Home = (props) => {
   } else if (props.content === "supplier") {
     title = "List Supplier"
     content = <>Halaman List Supplier</>
+  } else if (props.content === "error_boundary") {
+    title = "Example Error Boundary"
+    content = <ErrorBoundary>
+                <MyComponentWithError />
+              </ErrorBoundary>
+  } else {
+    title = "Not Found"
+    content = <>404. Page Not Found</>
   }
 
   return (

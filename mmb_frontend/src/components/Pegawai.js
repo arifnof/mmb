@@ -28,9 +28,9 @@ const Pegawai = (props) => {
         setErrorStatus(true)
         setErrorMessage(
           "Error saat mengambil data dari Backend : " +
-            error.response.data.message
+            error
         )
-        // console.log(error.response.data.message)
+        console.log(error)
       })
   }
 
@@ -46,7 +46,7 @@ const Pegawai = (props) => {
         getSemuaPegawai()
       })
       .catch((error) => {
-        console.log(error.response.data)
+        console.log(error)
       })
   }
 
@@ -63,6 +63,9 @@ const Pegawai = (props) => {
       setShowPegawaiForm(false)
       // refresh table pegawai
       getSemuaPegawai()
+    })
+    .catch((error) => {
+      console.log(error)
     })
   }
 
@@ -90,6 +93,9 @@ const Pegawai = (props) => {
         setShowPegawaiForm(true)
         setModeUbah(true) // mode edit pegawai
       })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   const btnHapusPegawaiHandler = (nrp, namaPegawai) => {
@@ -109,6 +115,9 @@ const Pegawai = (props) => {
       .then((response) => {
         btnCancelHapusHandler()
         getSemuaPegawai()
+      })
+      .catch((error) => {
+        console.log(error)
       })
   }
 
@@ -159,7 +168,7 @@ const Pegawai = (props) => {
         <tbody>
           {errorStatus && (
             <tr>
-              <td colSpan={6}>{errorMessage}</td>
+              <td colSpan={7}>{errorMessage}</td>
             </tr>
           )}
           {data.map((item, index) => {

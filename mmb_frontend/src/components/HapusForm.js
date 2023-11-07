@@ -1,4 +1,4 @@
-const HapusBarang = (props) => {
+const HapusForm = (props) => {
   return (
     <>
       <h3>{props.title}</h3>
@@ -21,4 +21,4 @@ const HapusBarang = (props) => {
   )
 }
 
-export default HapusBarang
+export default HapusForm

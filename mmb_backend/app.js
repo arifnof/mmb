@@ -6,8 +6,14 @@ const app = express()
 const port = 5005
 const apiRoutes = require("./routes/api")
 
+// cors settings
+// const corsOptions = {
+//   origin: 'http://localhost:3000',
+// };
+
 // enable cors
 app.use(cors())
+// app.use(cors(corsOptions))
 
 // Parse JSON request body
 app.use(express.json())
